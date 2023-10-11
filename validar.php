@@ -4,10 +4,26 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
-    if ($username=="admin" && $password=="12345") {
-        echo "Bienvenido";
+
+    $conn = new mysqli("localhost", "root", "", "coordinacion" );
+    if( $conn->connect_errno ) {
+        echo "Falla al conectarse a Mysql ( ". $conn->connect_errno . ") " .
+                $conn->connect_error ;
     } else {
-        echo "Error";
+        //echo $conn->host_info. "\n" ;
+    }
+
+    $sql = "SELECT * FROM `users` WHERE ".
+        "`username`='".$username."' and `password`=sha2('".$password."',256)";
+    
+    if($resultado = $conn->query($sql) ){
+        if ($registro = $resultado->fetch_assoc()) {
+            echo "Bienvenido".$registro["nombre"];
+        } else {
+            echo "Error User/Password no validos";
+        }
+    } else {
+        echo "Error conexion Base de Datos";
     }
 } else {
     echo "Error, Use el Formulario";
