@@ -22,11 +22,28 @@ $nombre = $_SESSION['nombre'];
     ?>
 </head>
 <body>
-    <h1>Bienvenido <?php echo $nombre ?></h1>
-    <br>
-    <form method="post" action="index.php">
-        <input type="number" name="documento" />
-        <button type="submit">Buscar</button>
+    <div class="container">
+    <div class="row">
+            <div class="col">
+            <a class="btn btn-danger float-end mt-2" href="logout.php">Logout</a>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col">
+            <h1>Bienvenido <?php echo $nombre ?></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+            <form method="post" action="index.php">
+            <div class="input-group mb-3">
+  <input type="number" class="form-control" placeholder="Ingrese Documento" >
+  <button class="btn btn-outline-secondary" type="button" >Buscar</button>
+</div>
     </form>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
