@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col mt-3">
-                <form action="validar.php" method="post">
+                <form action="validar.php?contar=1" method="POST">
                     <table align="center">
                         <tr>
                             <td>Username</td>
