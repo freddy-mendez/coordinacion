@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $username = $_POST['username'];
@@ -18,7 +19,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     
     if($resultado = $conn->query($sql) ){
         if ($registro = $resultado->fetch_assoc()) {
-            echo "Bienvenido".$registro["nombre"];
+            //echo "Bienvenido".$registro["nombre"];
+            $_SESSION['id_user']=$registro["id"];
+            $_SESSION['nombre']=$registro["nombre"];
+            header("Location: home.php");
+            return;
         } else {
             echo "Error User/Password no validos";
         }
