@@ -1,0 +1,55 @@
+{
+    "resultado": {
+        "aprendiz": {
+            "id": "2",
+            "documento": "234",
+            "nombres": "Tania",
+            "apellidos": "Rueda",
+            "email": "trueda@correo.com",
+            "ficha_id": "1",
+            "numero": "2557863",
+            "programa": "ADSO",
+            "lider": "Freddy"
+        },
+        "historial": [
+            {
+                "id": "4",
+                "aprendiz_id": "2",
+                "user_id": "2",
+                "motivo_id": "3",
+                "otros": "Viaje",
+                "fecha": "2023-02-25",
+                "hora": "09:00:00",
+                "duracion": "3",
+                "coordinador": "Ricardo",
+                "nombre_motivo": "Otros"
+            },
+            {
+                "id": "2",
+                "aprendiz_id": "2",
+                "user_id": "2",
+                "motivo_id": "1",
+                "otros": null,
+                "fecha": "2023-02-25",
+                "hora": "06:00:00",
+                "duracion": "1",
+                "coordinador": "Ricardo",
+                "nombre_motivo": "Enfermedad"
+            },
+            {
+                "id": "1",
+                "aprendiz_id": "2",
+                "user_id": "1",
+                "motivo_id": "2",
+                "otros": null,
+                "fecha": "2023-02-12",
+                "hora": "07:06:44",
+                "duracion": "3",
+                "coordinador": "Freddy",
+                "nombre_motivo":"Entrevists Etapa Productiva"
+            }
+        ]
+    },
+    "msg":"Resultado OK",
+    "estado":"OK"
+}

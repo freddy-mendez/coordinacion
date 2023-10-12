@@ -37,12 +37,19 @@ $nombre = $_SESSION['nombre'];
             <div class="col">
             <form method="post" action="index.php">
             <div class="input-group mb-3">
-  <input type="number" class="form-control" placeholder="Ingrese Documento" >
-  <button class="btn btn-outline-secondary" type="button" >Buscar</button>
-</div>
-    </form>
+                <input id="documento" type="number" class="form-control" placeholder="Ingrese Documento" >
+                <button class="btn btn-outline-secondary" type="button" id="btnBuscar" >Buscar</button>
+            </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div id="resultado" class="resultado">
+
+                </div>
             </div>
         </div>
+    </div>
     </div>
     
 </body>
