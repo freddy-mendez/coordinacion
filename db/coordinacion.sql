@@ -1,179 +1,31 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 10-10-2023 a las 18:40:27
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 7.3.33
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Versión del servidor:         10.4.22-MariaDB - mariadb.org binary distribution
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             12.3.0.6589
+-- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Base de datos: `coordinacion`
---
+-- La exportación de datos fue deseleccionada.
 
--- --------------------------------------------------------
+-- La exportación de datos fue deseleccionada.
 
---
--- Estructura de tabla para la tabla `aprendices`
---
+-- La exportación de datos fue deseleccionada.
 
-CREATE TABLE `aprendices` (
-  `id` int(11) NOT NULL,
-  `documento` bigint(20) NOT NULL,
-  `nombres` varchar(150) NOT NULL,
-  `apellidos` varchar(150) NOT NULL,
-  `email` varchar(250) NOT NULL,
-  `ficha_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- La exportación de datos fue deseleccionada.
 
--- --------------------------------------------------------
+-- La exportación de datos fue deseleccionada.
 
---
--- Estructura de tabla para la tabla `fichas`
---
-
-CREATE TABLE `fichas` (
-  `id` int(11) NOT NULL,
-  `numero` int(11) NOT NULL,
-  `programa` varchar(250) NOT NULL,
-  `lider` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `motivos`
---
-
-CREATE TABLE `motivos` (
-  `id` int(11) NOT NULL,
-  `nombre` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `salidas`
---
-
-CREATE TABLE `salidas` (
-  `id` int(11) NOT NULL,
-  `aprendiz_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `motivo_id` int(11) NOT NULL,
-  `otros` text DEFAULT NULL,
-  `fecha` date NOT NULL,
-  `hora` time NOT NULL,
-  `duracion` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(150) NOT NULL,
-  `password` varchar(64) NOT NULL,
-  `nombre` varchar(250) NOT NULL,
-  `email` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `aprendices`
---
-ALTER TABLE `aprendices`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQUE` (`documento`),
-  ADD KEY `FK1` (`ficha_id`);
-
---
--- Indices de la tabla `fichas`
---
-ALTER TABLE `fichas`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQUE` (`numero`);
-
---
--- Indices de la tabla `motivos`
---
-ALTER TABLE `motivos`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `salidas`
---
-ALTER TABLE `salidas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQUE` (`username`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `aprendices`
---
-ALTER TABLE `aprendices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `fichas`
---
-ALTER TABLE `fichas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `motivos`
---
-ALTER TABLE `motivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `salidas`
---
-ALTER TABLE `salidas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `aprendices`
---
-ALTER TABLE `aprendices`
-  ADD CONSTRAINT `FK1` FOREIGN KEY (`ficha_id`) REFERENCES `fichas` (`id`);
-COMMIT;
-
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
