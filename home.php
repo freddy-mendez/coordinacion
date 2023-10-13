@@ -67,6 +67,7 @@ if ($resultado = $conn->query($sql)) {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+            <input type="hidden" id="user_id" value="<?php echo $id_user; ?>" />
             <select name="motivo" id="motivo" class="form-control">
                 <?php
                 if (count($motivos) > 0) {
@@ -76,6 +77,10 @@ if ($resultado = $conn->query($sql)) {
                 }
                 ?>
             </select>
+            <div class="input-group mt-2">
+                <input id="nHoras" type="number" class="form-control" placeholder="Horas del Permiso" aria-label="Numero de Horas" aria-describedby="horas">
+                <span class="input-group-text" id="horas">Horas</span>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

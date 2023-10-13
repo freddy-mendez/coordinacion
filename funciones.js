@@ -105,5 +105,35 @@ $(document).ready(function () {
     $("#btn-nueva-salida").click(function (){
         var res = $("#resultado");
         $(res).html("");
-    }); 
+    });
+
+    $("#btnGuardar").click(function (){
+        var documento = $("#documento").val();
+        var motivo = $("#motivo").val();
+        var nHoras = $("#nHoras").val();
+        var user_id = $("#user_id").val();
+
+        $.ajax({
+            url:"/coordinacion/guardar.php",
+            type: "POST",
+            dataType: "json",
+            data: {
+                "documento" : documento,
+                "motivo" : motivo,
+                "nHoras" : nHoras,
+                "user_id" : user_id
+            },
+            success : function (data) {
+                if (data.estado=="OK") {
+                    $("#staticBackdrop").modal('hide');
+                } else {
+                    $("#resultado").text(data.msg);
+                }
+               
+            },
+            error: function (jqXHR, textStatus, exception) {
+                console.log(exception);
+            }
+        })
+    });
 });
