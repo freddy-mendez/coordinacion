@@ -1,114 +1,236 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Versión del servidor:         10.4.22-MariaDB - mariadb.org binary distribution
--- SO del servidor:              Win64
--- HeidiSQL Versión:             12.3.0.6589
--- --------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 17-10-2023 a las 14:13:35
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 7.3.33
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Base de datos: `coordinacion`
+--
 
--- Volcando estructura de base de datos para coordinacion
-CREATE DATABASE IF NOT EXISTS `coordinacion` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `coordinacion`;
+-- --------------------------------------------------------
 
--- Volcando estructura para tabla coordinacion.aprendices
-CREATE TABLE IF NOT EXISTS `aprendices` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Estructura de tabla para la tabla `aprendices`
+--
+
+CREATE TABLE `aprendices` (
+  `id` int(11) NOT NULL,
   `documento` bigint(20) NOT NULL,
   `nombres` varchar(150) NOT NULL,
   `apellidos` varchar(150) NOT NULL,
   `email` varchar(250) NOT NULL,
-  `ficha_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQUE` (`documento`),
-  KEY `FK1` (`ficha_id`),
-  CONSTRAINT `FK1` FOREIGN KEY (`ficha_id`) REFERENCES `fichas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  `ficha_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla coordinacion.aprendices: ~2 rows (aproximadamente)
+--
+-- Volcado de datos para la tabla `aprendices`
+--
+
 INSERT INTO `aprendices` (`id`, `documento`, `nombres`, `apellidos`, `email`, `ficha_id`) VALUES
-	(1, 123, 'Freddy', 'Mendez', 'fmendezo@correo.com', 1),
-	(2, 234, 'Tania', 'Rueda', 'trueda@correo.com', 1);
+(1, 123, 'Freddy', 'Mendez', 'fmendezo@correo.com', 1),
+(2, 234, 'Tania', 'Rueda', 'trueda@correo.com', 1);
 
--- Volcando estructura para tabla coordinacion.fichas
-CREATE TABLE IF NOT EXISTS `fichas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `fichas`
+--
+
+CREATE TABLE `fichas` (
+  `id` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
   `programa` varchar(250) NOT NULL,
-  `lider` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQUE` (`numero`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  `lider` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla coordinacion.fichas: ~1 rows (aproximadamente)
+--
+-- Volcado de datos para la tabla `fichas`
+--
+
 INSERT INTO `fichas` (`id`, `numero`, `programa`, `lider`) VALUES
-	(1, 2557863, 'ADSO', 'Freddy');
+(1, 2557863, 'ADSO', 'Freddy');
 
--- Volcando estructura para tabla coordinacion.motivos
-CREATE TABLE IF NOT EXISTS `motivos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+-- --------------------------------------------------------
 
--- Volcando datos para la tabla coordinacion.motivos: ~3 rows (aproximadamente)
+--
+-- Estructura de tabla para la tabla `motivos`
+--
+
+CREATE TABLE `motivos` (
+  `id` int(11) NOT NULL,
+  `nombre` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `motivos`
+--
+
 INSERT INTO `motivos` (`id`, `nombre`) VALUES
-	(1, 'Enfermedad'),
-	(2, 'Entrevists Etapa Productiva'),
-	(3, 'Otros');
+(1, 'Enfermedad'),
+(2, 'Entrevists Etapa Productiva'),
+(3, 'Otros');
 
--- Volcando estructura para tabla coordinacion.salidas
-CREATE TABLE IF NOT EXISTS `salidas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `salidas`
+--
+
+CREATE TABLE `salidas` (
+  `id` int(11) NOT NULL,
   `aprendiz_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `motivo_id` int(11) NOT NULL,
   `otros` text DEFAULT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
-  `duracion` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_salidas_aprendices` (`aprendiz_id`),
-  KEY `FK_salidas_users` (`user_id`),
-  KEY `FK_salidas_motivos` (`motivo_id`),
-  CONSTRAINT `FK_salidas_aprendices` FOREIGN KEY (`aprendiz_id`) REFERENCES `aprendices` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_salidas_motivos` FOREIGN KEY (`motivo_id`) REFERENCES `motivos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_salidas_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+  `duracion` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla coordinacion.salidas: ~4 rows (aproximadamente)
+--
+-- Volcado de datos para la tabla `salidas`
+--
+
 INSERT INTO `salidas` (`id`, `aprendiz_id`, `user_id`, `motivo_id`, `otros`, `fecha`, `hora`, `duracion`) VALUES
-	(1, 2, 1, 2, NULL, '2023-02-12', '07:06:44', 3),
-	(2, 2, 2, 1, NULL, '2023-02-25', '06:00:00', 1),
-	(3, 1, 1, 3, 'Personales', '2023-03-12', '08:00:00', 4),
-	(4, 2, 2, 3, 'Viaje', '2023-02-25', '09:00:00', 3);
+(1, 2, 1, 2, NULL, '2023-02-12', '07:06:44', 3),
+(2, 2, 2, 1, NULL, '2023-02-25', '06:00:00', 1),
+(3, 1, 1, 3, 'Personales', '2023-03-12', '08:00:00', 4),
+(4, 2, 2, 3, 'Viaje', '2023-02-25', '09:00:00', 3),
+(7, 2, 2, 2, NULL, '2023-10-13', '10:02:29', 1),
+(8, 1, 1, 2, NULL, '2023-10-13', '10:03:54', 3),
+(9, 2, 1, 2, NULL, '2023-10-13', '10:04:27', 3),
+(10, 2, 1, 1, NULL, '2023-10-13', '10:04:47', 3);
 
--- Volcando estructura para tabla coordinacion.users
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `username` varchar(150) NOT NULL,
   `password` varchar(64) NOT NULL,
   `nombre` varchar(250) NOT NULL,
-  `email` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  `email` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla coordinacion.users: ~2 rows (aproximadamente)
+--
+-- Volcado de datos para la tabla `users`
+--
+
 INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `email`) VALUES
-	(1, 'fmendezo', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Freddy', 'fmendezo@sena.edu.co'),
-	(2, 'fmo', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Ricardo', 'fmo@hotmail.com');
+(1, 'fmendezo', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Freddy', 'fmendezo@sena.edu.co'),
+(2, 'fmo', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Ricardo', 'fmo@hotmail.com');
 
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `aprendices`
+--
+ALTER TABLE `aprendices`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQUE` (`documento`),
+  ADD KEY `FK1` (`ficha_id`);
+
+--
+-- Indices de la tabla `fichas`
+--
+ALTER TABLE `fichas`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQUE` (`numero`);
+
+--
+-- Indices de la tabla `motivos`
+--
+ALTER TABLE `motivos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `salidas`
+--
+ALTER TABLE `salidas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_salidas_aprendices` (`aprendiz_id`),
+  ADD KEY `FK_salidas_users` (`user_id`),
+  ADD KEY `FK_salidas_motivos` (`motivo_id`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQUE` (`username`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `aprendices`
+--
+ALTER TABLE `aprendices`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `fichas`
+--
+ALTER TABLE `fichas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `motivos`
+--
+ALTER TABLE `motivos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `salidas`
+--
+ALTER TABLE `salidas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `aprendices`
+--
+ALTER TABLE `aprendices`
+  ADD CONSTRAINT `FK1` FOREIGN KEY (`ficha_id`) REFERENCES `fichas` (`id`);
+
+--
+-- Filtros para la tabla `salidas`
+--
+ALTER TABLE `salidas`
+  ADD CONSTRAINT `FK_salidas_aprendices` FOREIGN KEY (`aprendiz_id`) REFERENCES `aprendices` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_salidas_motivos` FOREIGN KEY (`motivo_id`) REFERENCES `motivos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_salidas_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
